@@ -2,7 +2,7 @@
 
 ## We are using Vitejs
 
-`npm create vite@lates`
+`npm create vite@latest`
 
 ### scripts
 
