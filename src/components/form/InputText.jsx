@@ -3,9 +3,9 @@ import { ErrorMessage as FormError } from '@hookform/error-message';
 import ErrorMessage from '../ui/ErrorMessage';
 
 function InputText({ input, formHelpers, isSub }) {
-    const { register, formState: { errors, isSubmitting } } = formHelpers
+    const { register, formState: { errors } } = formHelpers
     const { label, name, placeholder } = input
-    let rule = { required: true, min: 2, max: 3 }
+    let rule = { required: false, min: null, max: null }
 
     const rules = input.rules.split('|')
 
@@ -21,13 +21,13 @@ function InputText({ input, formHelpers, isSub }) {
         }
     })
 
-    // console.log('InputText', rule)
+    console.log('InputText', rule)
     return (
         <div className='mb-8'>
             <div className=' p-2 flex flex-col w-[350px]'>
                 <label className='mr-4 mb-2'>{label}</label>
 
-                <input {...register(name)} disabled={isSub} placeholder={placeholder} className='border px-2 py-1 rounded w-full' />
+                <input {...register(name, rule)} disabled={isSub} placeholder={placeholder} className='border px-2 py-1 rounded w-full' />
 
                 <FormError
                     errors={errors}

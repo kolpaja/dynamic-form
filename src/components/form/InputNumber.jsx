@@ -1,10 +1,15 @@
 import React from 'react'
+import { ErrorMessage as FormError } from '@hookform/error-message';
+import ErrorMessage from '../ui/ErrorMessage';
 
-function InputNumber({ input, register }) {
-    let rule = { required: true, min: 2, max: 3 }
+function InputNumber({ input, formHelpers, isSub }) {
+    const { register, formState: { errors } } = formHelpers
+    const { label, name, placeholder } = input
+    let rule = { required: false, min: null, max: null }
 
     const rules = input.rules.split('|')
 
+    //todo rules from this use case
     rules.map(item => {
         if (item == 'required') {
             rule = { ...rule, required: true }
@@ -17,11 +22,22 @@ function InputNumber({ input, register }) {
         }
     })
 
+    console.log('InputNumber', rule)
     return (
-        <div>
-            <input type="number" {...register(input.name, { ...rule })} />
-            <input type="submit" />
+        <div className='mb-8'>
+            <div className=' p-2 flex flex-col w-[350px]'>
+                <label className='mr-4 mb-2'>{label}</label>
+
+                <input {...register(name, rule)} type='number' disabled={isSub} placeholder={placeholder} className='border px-2 py-1 rounded w-full' />
+
+                <FormError
+                    errors={errors}
+                    name={name}
+                    render={({ message }) => <ErrorMessage>{message}</ErrorMessage>}
+                />
+            </div>
         </div>
+
     )
 }
 

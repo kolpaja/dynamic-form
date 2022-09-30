@@ -37,14 +37,16 @@ function Select({ input, formHelpers, isSub }) {
         <div className='mb-8'>
             <div className=' p-2 flex flex-col w-[350px]'>
                 <label className='mr-4 mb-2'>{label}</label>
+
                 <select
-                    {...register(name, { rules })}
+                    {...register(name, rule)}
                     placeholder={placeholder}
                     defaultValue={default_value}
                     disabled={isSub}
                     className='border px-2 py-1 rounded w-full'>
                     {options.map(option => <option key={option.value} >{option.label}</option>)}
                 </select>
+
                 <FormError
                     errors={errors}
                     name={name}
