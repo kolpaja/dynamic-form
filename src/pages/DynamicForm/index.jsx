@@ -62,6 +62,7 @@ function DynamicForm() {
     const clearStatus = () => setStatus(null)
 
     const onSubmit = (data) => {
+        console.log({ data })
         setIsLoading(true)
         const postData = {
             "data": {
@@ -77,7 +78,6 @@ function DynamicForm() {
                     setStatus('success')
                     formHelpers.reset()
                 }
-                console.log(res)
             })
             .catch((error) => {
                 setStatus('error')
@@ -112,9 +112,9 @@ function DynamicForm() {
                             Dynamic Form
                         </h1>
 
-                        <form onSubmit={formHelpers.handleSubmit(() => {
+                        <form onSubmit={formHelpers.handleSubmit((data) => {
                             setIsSub(true)
-                            setTimeout(() => onSubmit(), [2000])
+                            setTimeout(() => onSubmit(data), [2000])
                         })}>
                             {formInputs.map((input) => <div key={input.name}>{handleInputs(input, input.type, formHelpers, isSub)}</div>)}
                             <Button type='submit' disabled={isSub} >

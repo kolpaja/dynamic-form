@@ -21,7 +21,6 @@ function InputText({ input, formHelpers, isSub }) {
         }
     })
 
-    console.log('InputText', rule)
     return (
         <div className='mb-8'>
             <div className=' p-2 flex flex-col w-[350px]'>
